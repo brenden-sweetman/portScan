@@ -38,7 +38,7 @@ def csvExport(resultList):
     csvOut = "Request, Destination, Port, Result\n"
     # Loop through resultDict collecting values for csv
     for result in resultList:
-        csvOut = csvOut + "%s,%s,%s,%s\n".format(*result)
+        csvOut = csvOut + "%s,%s,%s,%s\n" % tuple(result)
     # write csv
     outFile = open("portScanResults.csv","w")
     outFile.write(csvOut)
@@ -83,10 +83,8 @@ if __name__ == "__main__":
     resultsList = []
     pool = Pool(5)
     for test in destList:
-        print "Add " + str(test) + " to pool"
         resultsList.append(pool.apply_async(testPort, args=tuple(test)))
     pool.close()
     pool.join()
     resultsList = [i.get() for i in resultsList]
-    print resultsList
-    #csvExport(resultsList)
+    csvExport(resultsList)
