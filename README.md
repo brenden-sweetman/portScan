@@ -1,2 +1,2 @@
 # portScan
-A lightweight port scanner with mutil-processing
+A lightweight port scanner with multi-processing
